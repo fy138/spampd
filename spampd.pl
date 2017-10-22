@@ -711,7 +711,7 @@ sub process_request {
 	#  $smtp_server->ok($destresp)
 	#	or die "Error in server->ok(client->hear): $!";
 	if ($what =~ /^ehlo/i){
-		$smtp_server->ok("250-mail.dayimold.com\r\n250-PIPELINING\r\n250-SIZE 26214400\r\n250-ETRN\r\n250-AUTH PLAIN LOGIN\r\n250-XFORWARD NAME ADDR PROTO HELO SOURCE PORT IDENT\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN") 
+		$smtp_server->ok("250-mail.mydomain.com\r\n250-PIPELINING\r\n250-SIZE 26214400\r\n250-ETRN\r\n250-AUTH PLAIN LOGIN\r\n250-XFORWARD NAME ADDR PROTO HELO SOURCE PORT IDENT\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN") 
 		or die "Error in server->ok(client->hear): $!";
 	}else{
 		$smtp_server->ok($destresp)
