@@ -708,9 +708,16 @@ sub process_request {
 	  # pass on whatever the relayhost said in response
 	  # $client->hear can handle multiline responses so no need to loop
 	  my $destresp = $client->hear;
-	  $smtp_server->ok($destresp)
+	#  $smtp_server->ok($destresp)
+	#	or die "Error in server->ok(client->hear): $!";
+	if ($what =~ /^ehlo/i){
+		$smtp_server->ok("250-mail.dayimold.com\r\n250-PIPELINING\r\n250-SIZE 26214400\r\n250-ETRN\r\n250-AUTH PLAIN LOGIN\r\n250-XFORWARD NAME ADDR PROTO HELO SOURCE PORT IDENT\r\n250-ENHANCEDSTATUSCODES\r\n250-8BITMIME\r\n250 DSN") 
 		or die "Error in server->ok(client->hear): $!";
-		
+	}else{
+		$smtp_server->ok($destresp)
+			or die "Error in server->ok(client->hear): $!";
+	}
+	
 	  if ( $self->{spampd}->{debug} ) {
 	    $self->mylog(2, "Destination response: '" . $destresp . "'"); }
 	  
